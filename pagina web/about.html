@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Sobre Iberseguridad</title>
+	<style>
+		:root{--bg:#0a0a0f;--red:#ff3b3b;--muted:#a1b0c2;--panel:#121217;--accent:#00ffcc;--highlight:#ff66cc}
+		html,body{height:100%;margin:0;font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:#f0f0f5}
+		.logo{width:64px;height:64px;border-radius:10px;background:linear-gradient(135deg,#330000,#500000);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700;box-shadow:0 0 8px var(--accent)}
+		h1{color:var(--accent)}
+		.wrap{max-width:1400px;margin:40px auto;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,43,43,0.06)}
+		nav{margin-top:18px;display:flex;gap:10px}
+		.btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:8px;color:var(--muted);cursor:pointer}
+		.btn.primary{border-color:var(--red);color:var(--red)}
+		.card{background:var(--panel);padding:16px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);box-shadow:0 4px 15px rgba(0,0,0,0.7);margin-bottom:18px;transition:transform 0.3s, box-shadow 0.3s}
+		.card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.8);border-color:var(--accent)}
+		.carousel{position:relative;overflow:hidden;}
+		.review{display:none;padding:16px;text-align:center;color:#f0f0f5;}
+		.review.active{display:block;}
+		.stars{color:#ffcc00;font-size:1.2em;}
+	</style>
+</head>
+<body>
+	<main class="wrap">
+		<header style="display:flex;align-items:center;gap:18px">
+			<div class="logo">CD</div>
+			<div>
+				<h1>Sobre Iberseguridad</h1>
+				<nav>
+					<a class="btn" href="index.html">Resumen</a>
+					<a class="btn" href="tools.html">Herramientas</a>
+					<a class="btn" href="advanced.html">Avanzado / Quiz</a>
+					<a class="btn" href="amenazas.html">Amenazas Comunes</a>
+					<a class="btn" href="consejos.html">Consejos Avanzados</a>
+					<a class="btn primary" href="about.html">Sobre Nosotros</a>
+				</nav>
+			</div>
+		</header>
+
+		<section class="card">
+			<h2>Quiénes somos</h2>
+			<p>Iberseguridad es una empresa de formación y consultoría en ciberseguridad con más de 10 años de experiencia. Nuestro objetivo es acercar la seguridad digital a estudiantes, profesionales y organizaciones de habla hispana.</p>
+			<p>Ofrecemos cursos presenciales y en línea, talleres personalizados y asesoría técnica. Vendemos nuestros servicios a institutos educativos, pymes, entidades públicas y particulares interesados en desarrollar habilidades técnicas y conciencia de seguridad.</p>
+		</section>
+
+		<section class="card">
+			<h2>Servicios de formación</h2>
+			<ul>
+				<li>Bootcamps intensivos de 3-5 días</li>
+				<li>Cursos semanales de 8 a 12 semanas</li>
+				<li>Talleres específicos (redes seguras, análisis de malware, criptografía)</li>
+				<li>Programas de certificación corporativa</li>
+			</ul>
+		</section>
+
+		<section class="card">
+			<h2>Itinerario de cursos</h2>
+			<dl>
+				<dt>Introducción a la ciberseguridad</dt>
+				<dd>Conceptos básicos, amenazas y medidas preventivas.</dd>
+				<dt>Seguridad de redes</dt>
+				<dd>Firewalls, VLANs, IDS/IPS y análisis de tráfico.</dd>
+				<dt>Desarrollo seguro</dt>
+				<dd>OWASP, validación de entrada y pruebas de penetración básicas.</dd>
+				<dt>Criptografía y privacidad</dt>
+				<dd>Cifrado simétrico/asimétrico, hashing y PKI.</dd>
+				<dt>Respuesta a incidentes</dt>
+				<dd>Metodología, forense digital y recuperación.</dd>
+			</dl>
+		</section>
+
+		<section class="card">
+			<h2>Nuestros profesores</h2>
+			<ul>
+				<li>Gonzalo Pérez – Analista de seguridad con 15 años en SOC.</li>
+				<li>Jorge Rodríguez – Especialista en criptografía aplicada.</li>
+				<li>María López – Ingeniera de redes certificada CCNP y CISSP.</li>
+				<li>Carlos Méndez – Ethical hacker con OSCP y experiencia en pentesting.</li>
+			</ul>
+		</section>
+
+		<section class="card">
+			<h2>Reseñas de clientes</h2>
+			<div class="carousel" id="reviews">
+				<div class="review active">
+					<p class="stars">★★★★★</p>
+					<p>"Excelente curso, instructores muy preparados." – Instituto Liceo</p>
+				</div>
+				<div class="review">
+					<p class="stars">★★★★☆</p>
+					<p>"Muy útil para nuestro equipo de TI." – Pyme TecnoSol</p>
+				</div>
+				<div class="review">
+					<p class="stars">★★★★★</p>
+					<p>"Contenidos claros y actualizados." – Universidad Estatal</p>
+				</div>
+				<div class="review">
+					<p class="stars">★★★★☆</p>
+					<p>"Recomendado para principiantes y avanzados." – Colegio Mayor</p>
+				</div>
+				<div class="review">
+					<p class="stars">★★★★★</p>
+					<p>"Los ejercicios prácticos fueron excepcionales." – Empresa Segura S.A.</p>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<script>
+		// simple carousel rotate every 4s
+		let idx=0;
+		const reviews=document.querySelectorAll('#reviews .review');
+		setInterval(()=>{
+			reviews[idx].classList.remove('active');
+			idx=(idx+1)%reviews.length;
+			reviews[idx].classList.add('active');
+		},4000);
+	</script>
+</body>
+</html>
