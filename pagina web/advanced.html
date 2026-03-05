@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Avanzado — Ciberseguridad</title>
+  <style>
+    :root{--bg:#070707;--red:#ff2b2b;--muted:#9aa0a6}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:#e6e6e6}
+    .wrap{max-width:1100px;margin:40px auto;padding:28px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:16px;border-radius:10px;border:1px solid rgba(255,43,43,0.06);margin-top:16px}
+    a.btn{display:inline-block;padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);color:var(--muted);text-decoration:none}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header style="display:flex;gap:18px;align-items:center">
+      <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#120000,#300000);display:flex;align-items:center;justify-content:center;color:var(--red);font-weight:700">CD</div>
+      <div>
+        <h1>Ciberseguridad — Nivel Avanzado</h1>
+        <div><a class="btn" href="index.html">Volver</a> <a class="btn" href="tools.html">Herramientas</a></div>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Modelos de amenaza (versión para alumnado)</h2>
+      <p>Un modelo de amenaza ayuda a entender quién querría atacar, por qué y cómo. Para 4º ESO lo explicamos con ejemplos: redes sociales, dispositivos móviles y equipos del instituto.</p>
+      <details>
+        <summary>Componentes</summary>
+        <ul>
+          <li>Actores: quién ataca (curiosos, ciberdelincuentes, competidores).</li>
+          <li>Activos: qué proteger (datos personales, trabajos, accesos).</li>
+          <li>Vectores: cómo atacan (phishing, malware, contraseñas débiles).</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="card">
+      <h3>Criptografía básica</h3>
+      <p>Explicamos con analogías y un pequeño ejercicio interactivo sobre cifrado César.</p>
+      <label>Texto: <input id="plain" value="hola mundo"></label>
+      <label>Desplazamiento: <input id="shift" type="number" value="3" style="width:60px"></label>
+      <button id="enc">Cifrar</button>
+      <div id="out" style="margin-top:10px;color:var(--muted)"></div>
+    </section>
+
+    <section class="card">
+      <h3>Cifrado Vigenère</h3>
+      <p>Un paso más: el Vigenère usa una palabra clave repetida para desplazar cada letra.</p>
+      <label>Texto: <input id="vig-plain" value="hola mundo" style="width:100%"></label><br>
+      <label>Clave: <input id="vig-key" value="clave"></label>
+      <button id="vig-enc">Cifrar Vigenère</button>
+      <div id="vig-out" style="margin-top:10px;color:var(--muted)"></div>
+    </section>
+
+    <section class="card">
+      <h3>Hash SHA-256</h3>
+      <p>Las funciones de hash generan una "huella" fija de cualquier texto; es unidireccional.</p>
+      <label>Texto: <input id="hash-input" style="width:100%" value="hola"></label>
+      <button id="hash-btn">Calcular SHA-256</button>
+      <div id="hash-out" style="margin-top:10px;color:var(--muted);word-break:break-all"></div>
+      <p>Usado hoy en contraseñas, integridad y criptomonedas.</p>
+    </section>
+
+    <section class="card">
+      <h3>Cifrado moderno (teoría)</h3>
+      <p><strong>AES</strong>: algoritmo simétrico que cifra datos en bloques; es el estándar para proteger la mayoría de la comunicación en internet (HTTPS, Wi‑Fi).</p>
+      <p><strong>RSA</strong>: usa clave pública/privada (asimétrico); se utiliza para intercambiar llaves de forma segura y firmar digitalmente.</p>
+    </section>
+
+    <section class="card">
+      <h3>Tópicos para futuros estudios</h3>
+      <ul>
+        <li>Autenticación multifactor</li>
+        <li>Seguridad en aplicaciones web (OWASP Top 10)</li>
+        <li>Introducción a la seguridad ofensiva y defensiva</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    function caesar(str, shift){
+      return str.split('').map(c=>{
+        const a='a'.charCodeAt(0), z='z'.charCodeAt(0);
+        const A='A'.charCodeAt(0), Z='Z'.charCodeAt(0);
+        const code = c.charCodeAt(0);
+        if(code>=a && code<=z) return String.fromCharCode((code-a+shift+26)%26 + a);
+        if(code>=A && code<=Z) return String.fromCharCode((code-A+shift+26)%26 + A);
+        return c;
+      }).join('');
+    }
+    document.getElementById('enc').addEventListener('click',()=>{
+      const t = document.getElementById('plain').value || '';
+      const s = parseInt(document.getElementById('shift').value||0,10);
+      document.getElementById('out').textContent = 'Cifrado César: ' + caesar(t,s);
+    });
+    // Vigenere
+    function vigenere(text,key){
+      let out='';
+      let ki=0;
+      for(let c of text){
+        const A='A'.charCodeAt(0), Z='Z'.charCodeAt(0);
+        const a='a'.charCodeAt(0), z='z'.charCodeAt(0);
+        const code=c.charCodeAt(0);
+        const kcode = key[ki % key.length].toLowerCase().charCodeAt(0) - a;
+        if(code>=a && code<=z){out+=String.fromCharCode((code-a+kcode)%26+a);ki++;}
+        else if(code>=A && code<=Z){out+=String.fromCharCode((code-A+kcode)%26+A);ki++;}
+        else {out+=c;}
+      }
+      return out;
+    }
+    document.getElementById('vig-enc').addEventListener('click',()=>{
+      const t = document.getElementById('vig-plain').value || '';
+      const k = document.getElementById('vig-key').value || '';
+      document.getElementById('vig-out').textContent = 'Cifrado Vigenère: ' + vigenere(t,k);
+    });
+    // SHA-256 using Web Crypto
+    async function sha256(str){
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+    document.getElementById('hash-btn').addEventListener('click', async ()=>{
+      const t = document.getElementById('hash-input').value || '';
+      document.getElementById('hash-out').textContent = await sha256(t);
+    });
+  </script>
+</body>
+</html>

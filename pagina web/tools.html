@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Herramientas — Ciberseguridad (4º ESO)</title>
+  <style>
+    :root{--bg:#070707;--red:#ff2b2b;--muted:#9aa0a6;--panel:#0e0e10}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:#e6e6e6}
+    .wrap{max-width:1100px;margin:40px auto;padding:28px;border-radius:12px}
+    header{display:flex;align-items:center;gap:18px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#120000,#300000);display:flex;align-items:center;justify-content:center;color:var(--red);font-weight:700}
+    h1{margin:0}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:16px;border-radius:10px;border:1px solid rgba(255,43,43,0.06);margin-top:16px}
+    .tools-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .tool{background:#0c0c0c;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+    .interactive{margin-top:14px}
+    a.btn{display:inline-block;padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);color:var(--muted);text-decoration:none}
+    .nav{margin-top:12px}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="logo">CD</div>
+      <div>
+        <h1>Herramientas de Ciberseguridad</h1>
+        <div class="nav"><a class="btn" href="index.html">Volver</a> <a class="btn" href="advanced.html">Avanzado</a></div>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Resumen para 4º ESO</h2>
+      <p>En esta página ampliamos las herramientas útiles, con ejemplos y una pequeña interacción para entender cuál usar según la situación.</p>
+
+      <div class="tools-list" id="tools-list">
+        <div class="tool"><strong>Antivirus</strong><p>Protege contra programas dañinos. Mantenerlo actualizado.</p></div>
+        <div class="tool"><strong>Firewall</strong><p>Controla tráfico y bloquea accesos no deseados a la red.</p></div>
+        <div class="tool"><strong>Backups</strong><p>Copia de seguridad periódica en disco externo o nube. Útil ante fallos o ransomware.</p></div>
+        <div class="tool"><strong>Gestores de contraseñas</strong><p>Generan y guardan contraseñas únicas y complejas.</p></div>
+        <div class="tool"><strong>VPN / Cifrado</strong><p>Oculta tu actividad y protege la conexión, especialmente en redes públicas.</p></div>
+        <div class="tool"><strong>Actualizaciones</strong><p>Instalar parches cierra vulnerabilidades conocidas.</p></div>
+      </div>
+
+      <div class="interactive">
+        <h3>Situaciones y soluciones</h3>
+        <p>Selecciona una situación y te sugerimos la herramienta principal.</p>
+        <select id="scenario">
+          <option value="malware">Crees que tienes malware</option>
+          <option value="acceso">Alguien intenta entrar en la red</option>
+          <option value="perdida">Has perdido archivos importantes</option>
+          <option value="contraseña">No recuerdo mis contraseñas</option>
+          <option value="wifi">Estás en una wifi pública</option>
+          <option value="sinparche">Tu ordenador pide reiniciar por actualización</option>
+        </select>
+        <button id="btn-check">Sugerir</button>
+        <div id="suggestion" style="margin-top:10px;color:var(--muted)"></div>
+        <hr style="margin:20px 0; border:1px solid rgba(255,255,255,0.1)">
+        <h3>Mini-quiz</h3>
+        <p>¿Qué herramienta usarías para navegar sin que te espíen en una cafetería?</p>
+        <button class="btn" id="quiz-vpn">VPN</button> <button class="btn" id="quiz-firewall">Firewall</button>
+        <div id="quiz-ans" style="margin-top:10px;color:var(--muted)"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Contenido docente (huecos)</h3>
+      <p>Aquí el profesor puede subir guías, imágenes o ejercicios mediante el backend. Actualmente son huecos.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+        <div style="height:140px;background:#0b0b0b;border:1px dashed rgba(255,255,255,0.03);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted)">Imagen guía 1 (hueco)</div>
+        <div style="height:140px;background:#0b0b0b;border:1px dashed rgba(255,255,255,0.03);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted)">Imagen guía 2 (hueco)</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('btn-check').addEventListener('click',()=>{
+      const v = document.getElementById('scenario').value;
+      const map = {
+        'malware':'Ejecuta un análisis con un antivirus actualizado y desconecta el dispositivo de la red.',
+        'acceso':'Revisa el firewall y cambia contraseñas; habilita 2FA si es posible.',
+        'perdida':'Restaura desde backup si existe; considera usar software de recuperación si es local.',
+        'contraseña':'Usa un gestor de contraseñas y habilita verificación en dos pasos.',
+        'wifi':'Conecta mediante una VPN y evita redes abiertas sin cifrado.',
+        'sinparche':'Acepta la actualización e instala los parches; no lo dejes para más tarde.'
+      };
+      document.getElementById('suggestion').textContent = map[v] || '';
+    });
+    document.getElementById('quiz-vpn').addEventListener('click',()=>{
+      document.getElementById('quiz-ans').textContent='¡Correcto! una VPN protege tu navegación en redes públicas.';
+    });
+    document.getElementById('quiz-firewall').addEventListener('click',()=>{
+      document.getElementById('quiz-ans').textContent='No exactamente. Un firewall controla el tráfico, pero una VPN cifra tu conexión.';
+    });
+  </script>
+</body>
+</html>

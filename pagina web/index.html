@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Ciberseguridad — Prof. Digital (4º ESO)</title>
+	<style>
+		:root{
+			--bg:#070707;
+			--red:#ff2b2b;
+			--muted:#9aa0a6;
+			--panel:#0e0e10;
+			--glass: rgba(255,255,255,0.03);
+		}
+		html,body{height:100%;margin:0;font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:#e6e6e6}
+		/* animated decorative lines */
+		.lines{position:fixed;inset:0;pointer-events:none;overflow:hidden;}
+		.line{position:absolute;height:2px;background:linear-gradient(90deg, transparent, var(--red), transparent);opacity:0.12}
+		.line.x{width:120%;left:-10%;animation:moveX 8s linear infinite}
+		.line.y{height:120%;width:2px;top:-10%;left:50%;transform:translateX(-50%);background:linear-gradient(180deg, transparent, var(--red), transparent);opacity:0.06;animation:moveY 10s linear infinite}
+		@keyframes moveX{0%{transform:translateX(-5%)}50%{transform:translateX(5%)}100%{transform:translateX(-5%)}}
+		@keyframes moveY{0%{transform:translateY(-5%)}50%{transform:translateY(5%)}100%{transform:translateY(-5%)}}
+
+		.wrap{max-width:1100px;margin:40px auto;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,43,43,0.06)}
+		header{display:flex;align-items:center;gap:18px}
+		.logo{width:64px;height:64px;border-radius:10px;background:linear-gradient(135deg,#120000, #300000);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--red);font-size:20px;border:1px solid rgba(255,43,43,0.15)}
+		h1{margin:0;font-size:28px}
+		p.lead{color:var(--muted);margin-top:6px}
+
+		nav{margin-top:18px;display:flex;gap:10px}
+		.btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:8px;color:var(--muted);cursor:pointer}
+		.btn.primary{border-color:var(--red);color:var(--red)}
+
+		.grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+		.card{background:var(--panel);padding:16px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+
+		.section-title{display:flex;justify-content:space-between;align-items:center}
+		.professor{font-style:italic;color:#f2e6e0}
+
+		details summary{cursor:pointer;outline:none;padding:8px;border-radius:8px}
+		details[open] summary{background:linear-gradient(90deg, rgba(255,43,43,0.06), transparent)}
+
+		/* quiz */
+		.quiz .option{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);margin-top:8px;cursor:pointer}
+		.quiz .option.correct{border-color:rgba(50,200,100,0.6);background:rgba(50,200,100,0.04)}
+		.quiz .option.wrong{border-color:rgba(200,80,80,0.6);background:rgba(200,80,80,0.03)}
+
+		footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+		.placeholder{display:block;width:100%;height:180px;background:linear-gradient(90deg,#0c0c0c,#111111);border-radius:8px;border:1px dashed rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+
+		/* small responsive */
+		@media(max-width:980px){.grid{grid-template-columns:1fr}}
+	</style>
+</head>
+<body>
+	<div class="lines" aria-hidden="true">
+		<div class="line x" style="top:10%"></div>
+		<div class="line x" style="top:30%;animation-duration:12s;opacity:0.08"></div>
+		<div class="line x" style="top:60%;animation-duration:9s;opacity:0.06"></div>
+		<div class="line y" style="left:20%"></div>
+		<div class="line y" style="left:80%;animation-duration:14s;opacity:0.04"></div>
+	</div>
+
+	<main class="wrap">
+		<header>
+			<div class="logo">CD</div>
+			<div>
+				<h1>Ciberseguridad — Clase para 4º ESO</h1>
+				<p class="lead">Explicado por Jorge Briñas Vico y Gonzalo de la Viuda Guerra, pero claro y directo para alumnos de la clase de Digitalización.</p>
+			</div>
+		</header>
+
+		<nav>
+			<a class="btn" href="index.html">Resumen</a>
+			<a class="btn" href="tools.html">Herramientas</a>
+			<a class="btn primary" href="advanced.html">Avanzado / Quiz</a>
+		</nav>
+
+		<div class="grid">
+			<section>
+				<article class="card" id="content">
+					<div class="section-title">
+						<h2>¿Qué es la ciberseguridad?</h2>
+						<span class="professor">Profes. Dr. Digital</span>
+					</div>
+					<p id="intro">Cargando contenido...</p>
+                    <p>En términos sencillos, la ciberseguridad se ocupa de proteger los dispositivos conectados a internet (ordenadores, móviles, consolas) y la información que almacenan. Al igual que en una ciudad hay policías y cámaras, en el mundo digital existen mecanismos que vigilan y controlan el acceso para que solo las personas autorizadas puedan entrar.</p>
+                    <p>Hoy en día nuestros teléfonos guardan fotos, conversaciones y contraseñas. Si alguien logra entrar sin permiso, puede causar daño desde robar identidades hasta bloquear equipos con virus.</p>
+
+                    <details>
+                        <summary><strong>¿Por qué es importante?</strong></summary>
+                        <p>La ciberseguridad protege la información y las redes. Sin ella, datos personales y sistemas pueden ser usados por personas malintencionadas. Es como cerrar la puerta de tu casa y poner una alarma.</p>
+                        <p>Además, la ciberseguridad es clave para la economía: bancos, hospitales y gobiernos dependen de ella para funcionar. Una brecha puede costar millones de euros y dañar la confianza de millones de usuarios.</p>
+                    </details>
+
+                    <details>
+                        <summary><strong>Ejemplos sencillos</strong></summary>
+                        <ul>
+                            <li>Contraseñas seguras y gestores</li>
+                            <li>Actualizaciones del sistema</li>
+                            <li>Verificación en dos pasos</li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary><strong>Amenazas comunes</strong></summary>
+                        <ul>
+                            <li>Phishing (emails falsos que piden tu contraseña)</li>
+                            <li>Malware (programas que dañan o espían tu equipo)</li>
+                            <li>Ransomware (secuestran tus archivos y piden dinero)</li>
+                        </ul>
+                    </details>
+
+                    <h3>Recursos del profesor</h3>
+                    <p>Abajo hay huecos para imágenes y materiales que el profesor podrá subir en el backend. Pueden ser gráficos, esquemas de red o ejemplos de contraseñas fuertes.</p>
+				<article class="card" style="margin-top:14px">
+					<h3>Herramientas de ciberseguridad</h3>
+					<ul id="tools-list">
+						<li>Cargando...</li>
+					</ul>
+				</article>
+                <article class="card" style="margin-top:14px">
+                    <h3>Prueba de contraseña</h3>
+                    <p>Escribe una contraseña y evalúa su fuerza. Usa letras, números y símbolos.</p>
+                    <input type="password" id="pwd" placeholder="Introduce contraseña" style="width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:#111;color:#eee">
+                    <div id="pwd-strength" style="margin-top:8px;color:var(--muted)"></div>
+                </article>
+			</section>
+
+			<aside>
+				<div class="card">
+					<h3>Quiz Rápido</h3>
+					<div class="quiz" id="quiz">
+						<p><strong>¿Qué es una contraseña segura?</strong></p>
+						<div class="option" data-correct="false">Nombre del usuario</div>
+						<div class="option" data-correct="true">Una combinación larga y única</div>
+						<div class="option" data-correct="false">La fecha de nacimiento</div>
+					</div>
+					<div id="quiz-result" style="margin-top:10px;color:var(--muted)"></div>
+				</div>
+
+				<div class="card" style="margin-top:12px">
+					<h4>Interactividad</h4>
+					<p>Pulsa los botones arriba para navegar a secciones o inicia el quiz.</p>
+					<button class="btn" id="btn-fetch">Recargar contenido desde backend</button>
+				</div>
+			</aside>
+		</div>
+
+		<footer>
+			<div>Creado con estilo sci‑fi — colores negros y toques rojos.</div>
+		</footer>
+	</main>
+
+	<script>
+		// Contenido dinámico: fetch desde /api/content
+		async function loadContent(){
+			try{
+				const res = await fetch('/api/content');
+				if(!res.ok) throw new Error('No hay backend');
+				const data = await res.json();
+				document.getElementById('intro').textContent = data.intro;
+				const toolsList = document.getElementById('tools-list');
+				toolsList.innerHTML = '';
+				data.tools.forEach(t=>{const li=document.createElement('li');li.textContent = t;toolsList.appendChild(li)});
+			}catch(e){
+				document.getElementById('intro').textContent = 'Servidor backend no disponible localmente. El contenido está en el frontend.';
+				document.getElementById('tools-list').innerHTML = '<li>Antivirus, firewalls, copias de seguridad, gestores de contraseñas.</li>';
+			}
+		}
+
+		document.getElementById('btn-fetch').addEventListener('click',loadContent);
+
+		// quiz logic
+		document.querySelectorAll('.quiz .option').forEach(opt=>{
+			opt.addEventListener('click',()=>{
+				const correct = opt.dataset.correct === 'true';
+				document.querySelectorAll('.quiz .option').forEach(o=>o.classList.remove('correct','wrong'));
+				if(correct){opt.classList.add('correct');document.getElementById('quiz-result').textContent='¡Correcto! Una contraseña segura debe ser larga, única y difícil de adivinar.'}
+				else{opt.classList.add('wrong');document.getElementById('quiz-result').textContent='No exactamente — esa no es una buena práctica. Piensa en combinaciones largas y únicas.'}
+			})
+		})
+
+		// Cargar contenido al inicio
+		loadContent();
++
+		// password strength meter
+		document.getElementById('pwd').addEventListener('input', (e) => {
+			const pwd = e.target.value;
+			let score = 0;
+			if(pwd.length >= 8) score += 1;
+			if(/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) score += 1;
+			if(/[0-9]/.test(pwd)) score += 1;
+			if(/[^A-Za-z0-9]/.test(pwd)) score += 1;
+			const labels = ['Muy débil','Débil','Media','Fuerte','Muy fuerte'];
+			document.getElementById('pwd-strength').textContent = labels[score] || '';
+		});
+	</script>
+</body>
+</html>
