@@ -132,20 +132,19 @@
 		</section>
 
 		<footer>
-			<p>Desarrollado por Iberseguridad — Contenido educativo para 4º ESO.</p>
 		</footer>
 	</main>
 
 	<script>
 		// Simple fade-in on scroll
-		const observer = new IntersectionObserver(entries => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('visible');
-				}
-			});
-		});
-		document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+		// const observer = new IntersectionObserver(entries => {
+		// 	entries.forEach(entry => {
+		// 		if (entry.isIntersecting) {
+		// 			entry.target.classList.add('visible');
+		// 		}
+		// 	});
+		// });
+		// document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 		// load consejos
 		async function loadConsejos(){
@@ -156,8 +155,11 @@
 				const cont=document.getElementById('advice-content');
 				cont.innerHTML='';
 				data.advice.forEach(a=>{
+					console.log('Consejo cargado: ' + a);
 					const det=document.createElement('details');
-					det.innerHTML='<summary>'+a+'</summary>';
+					det.className = 'card';
+					// det.setAttribute('open', '');
+					det.innerHTML='<summary>'+a+'</summary><p>Este es un consejo avanzado para mejorar tu ciberseguridad.</p>';
 					cont.appendChild(det);
 				});
 			}catch(e){console.error(e);}
