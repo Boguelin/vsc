@@ -7,6 +7,11 @@
   <style>
     :root{--bg:#0a0a0f;--red:#ff3b3b;--muted:#a1b0c2;--panel:#121217;--accent:#00ffcc;--highlight:#ff66cc}
     html,body{height:100%;margin:0;font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:#f0f0f5}
+    .sticky-nav{position:sticky;top:0;background:linear-gradient(180deg, rgba(10,10,15,0.95), rgba(10,10,15,0.85));padding:12px 0;box-shadow:0 2px 15px rgba(0,0,0,0.5);z-index:1000;border-bottom:1px solid rgba(0,255,204,0.2);backdrop-filter:blur(10px)}
+    .sticky-nav ul{list-style:none;display:flex;justify-content:center;gap:20px;margin:0;padding:0;flex-wrap:wrap;max-width:1400px;margin:0 auto;padding:0 28px}
+    .sticky-nav a{color:#a1b0c2;text-decoration:none;padding:6px 12px;border-radius:4px;transition:all 0.3s ease;font-size:14px;font-weight:500;display:inline-block}
+    .sticky-nav a:hover{background-color:rgba(0,255,204,0.1);color:#00ffcc}
+    .sticky-nav a.active{background-color:#00ffcc;color:#0a0a0f;font-weight:600}
     h2{color:var(--accent)}
     .wrap{max-width:1400px;margin:40px auto;padding:28px;border-radius:12px}
     header{display:flex;align-items:center;gap:18px}
@@ -44,6 +49,17 @@
     <div class="line y" style="left:20%"></div>
     <div class="line y" style="left:80%;animation-duration:14s;opacity:0.04"></div>
   </div>
+
+  <nav class="sticky-nav">
+    <ul>
+      <li><a href="amenazas.html#amenazas">Amenazas</a></li>
+      <li><a href="#herramientas">Herramientas</a></li>
+      <li><a href="consejos.html#consejos">Consejos</a></li>
+      <li><a href="advanced.html#avanzado">Avanzado</a></li>
+      <li><a href="about.html#sobre-nosotros">Sobre Nosotros</a></li>
+    </ul>
+  </nav>
+
   <main class="wrap">
     <header class="fade-in">
       <div class="logo">CD</div>
@@ -60,7 +76,7 @@
       </div>
     </header>
 
-    <section class="card fade-in">
+    <section class="card fade-in" id="herramientas">
       <h2>Resumen para 4º ESO</h2>
       <p>En esta página ampliamos las herramientas útiles, con ejemplos y una pequeña interacción para entender cuál usar según la situación.</p>
 
@@ -193,6 +209,26 @@
         observer.observe(el);
       });
     })();
+
+    // Sticky nav active link detection
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('[id]');
+      const navLinks = document.querySelectorAll('.sticky-nav a');
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes('#' + current) && current !== '') {
+          link.classList.add('active');
+        }
+      });
+    });
   </script>
 
   <footer>
