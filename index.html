@@ -112,7 +112,7 @@
 
 	<nav class="sticky-nav">
 		<ul>
-			<li><a href="#amenazas">Amenazas</a></li>
+			<li><a href="amenazas.html#amenazas">Amenazas</a></li>
 			<li><a href="tools.html#herramientas">Herramientas</a></li>
 			<li><a href="consejos.html#consejos">Consejos</a></li>
 			<li><a href="advanced.html#avanzado">Avanzado</a></li>
@@ -257,7 +257,7 @@
                         </ul>
                         <p>Estos casos muestran cómo incluso errores pequeños pueden tener impacto global.</p>
                     </details>
-                <details class="card" style="margin-top:14px">
+                <details class="card" id="avanzado" style="margin-top:14px">
                     <summary><h3>Prueba de contraseña</h3></summary>
                     <p>Escribe una contraseña y evalúa su fuerza; la barra indica visualmente cuán resistente es.</p>
                     <div class="pwd-container">
@@ -287,7 +287,7 @@
                     </ul>
                 </details>
 
-                <details class="card" style="margin-top:14px">
+                <details class="card" id="sobre-nosotros" style="margin-top:14px">
                     <summary><h3>Enlaces útiles</h3></summary>
                     <ul>
                         <li><a href="https://www.incibe.es" target="_blank" style="color:var(--accent)">INCIBE (seguridad en España)</a></li>
@@ -328,7 +328,7 @@
 					<button class="btn" id="btn-fetch">Recargar contenido desde backend</button>
 				</details>
 
-                <details class="card fade-in" style="margin-top:12px">
+                <details class="card fade-in" id="consejos" style="margin-top:12px">
                     <summary><h4>Consejos rápidos</h4></summary>
                     <ul id="tips">
                         <!-- consejos desde backend -->
@@ -497,24 +497,26 @@
 		attachQuizHandlers(quiz2);
 
 		// Sticky nav active link detection
-		window.addEventListener('scroll', () => {
-			const sections = document.querySelectorAll('[id]');
+		(function(){
+			const sectionIds = ['amenazas','herramientas','consejos','avanzado','sobre-nosotros'];
 			const navLinks = document.querySelectorAll('.sticky-nav a');
-			let current = '';
-			sections.forEach(section => {
-				const sectionTop = section.offsetTop;
-				const sectionHeight = section.clientHeight;
-				if (window.scrollY >= sectionTop - 100) {
-					current = section.getAttribute('id');
-				}
-			});
-			navLinks.forEach(link => {
-				link.classList.remove('active');
-				if (link.getAttribute('href').includes('#' + current) && current !== '') {
-					link.classList.add('active');
-				}
-			});
-		});
+			function updateActiveLink(){
+				const scrollY = window.scrollY || window.pageYOffset;
+				let current = '';
+				sectionIds.forEach(id=>{
+					const sec = document.getElementById(id);
+					if(!sec) return;
+					if(scrollY >= sec.offsetTop - 120) current = id;
+				});
+				navLinks.forEach(link=>{
+					const href = link.getAttribute('href') || '';
+					link.classList.toggle('active', current && href.includes('#' + current));
+				});
+			}
+			window.addEventListener('scroll', updateActiveLink, {passive:true});
+			window.addEventListener('resize', updateActiveLink);
+			updateActiveLink();
+		})();
 	</script>
 </body>
 </html>

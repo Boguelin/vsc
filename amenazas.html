@@ -85,7 +85,7 @@
 
 	<nav class="sticky-nav">
 		<ul>
-			<li><a href="#amenazas">Amenazas</a></li>
+			<li><a href="amenazas.html#amenazas">Amenazas</a></li>
 			<li><a href="tools.html#herramientas">Herramientas</a></li>
 			<li><a href="consejos.html#consejos">Consejos</a></li>
 			<li><a href="advanced.html#avanzado">Avanzado</a></li>
@@ -188,6 +188,29 @@
 			}
 		}
 		loadAmenazas();
+
+		// Sticky nav active link detection
+		(function(){
+			const sectionIds = ['amenazas','herramientas','consejos','avanzado','sobre-nosotros'];
+			const navLinks = document.querySelectorAll('.sticky-nav a');
+			function updateActiveLink(){
+				const scrollY = window.scrollY || window.pageYOffset;
+				let current = '';
+				sectionIds.forEach(id=>{
+					const sec = document.getElementById(id);
+					if(!sec) return;
+					if(scrollY >= sec.offsetTop - 120) current = id;
+				});
+				navLinks.forEach(link=>{
+					const href = link.getAttribute('href') || '';
+					link.classList.toggle('active', current && href.includes('#' + current));
+				});
+			}
+			window.addEventListener('scroll', updateActiveLink, {passive:true});
+			window.addEventListener('resize', updateActiveLink);
+			updateActiveLink();
+		})();
+
 	</script>
 </body>
 </html>
