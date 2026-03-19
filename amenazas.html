@@ -83,6 +83,16 @@
 		<div class="line y" style="left:80%;animation-duration:14s;opacity:0.04"></div>
 	</div>
 
+	<nav class="sticky-nav">
+		<ul>
+			<li><a href="amenazas.html#amenazas">Amenazas</a></li>
+			<li><a href="tools.html#herramientas">Herramientas</a></li>
+			<li><a href="consejos.html#consejos">Consejos</a></li>
+			<li><a href="advanced.html#avanzado">Avanzado</a></li>
+			<li><a href="about.html#sobre-nosotros">Sobre Nosotros</a></li>
+		</ul>
+	</nav>
+
 	<main class="wrap">
 		<header class="fade-in">
 			<div class="logo">AC</div>
@@ -101,14 +111,15 @@
 			<a class="btn" href="about.html">Sobre Nosotros</a>
 		</nav>
 
-		<section>
+		<section id="amenazas">
 			<details class="card" open>
 				<div class="section-title">
 					<h2>Amenazas Comunes</h2>
 					<span class="professor">Iberseguridad</span>
 				</div>
-				<p>Las amenazas cibernéticas son ataques o vulnerabilidades que pueden comprometer la seguridad de tus datos y dispositivos. A continuación, detallamos las más comunes.</p>
-				<div id="amenazas-content"></div>
+					<p>Las amenazas cibernéticas son ataques o vulnerabilidades que pueden comprometer la seguridad de tus datos y dispositivos. A continuación, detallamos las más comunes, cómo se manifiestan y qué señales pueden ayudarte a identificarlas.</p>
+					<div id="amenazas-content"></div>
+					<p>Cada amenaza incluye un ejemplo sencillo y un pequeño consejo para reconocerla: por ejemplo, un email que te pide tu contraseña o una aplicación que consume mucha CPU sin motivo.</p>
 			</details>
 
 			<details class="card fade-in" style="margin-top:14px">
@@ -123,6 +134,17 @@
 				<ul>
 					<li><a href="https://www.incibe.es/protege-tu-empresa/amenazas" target="_blank">INCIBE - Amenazas</a></li>
 					<li><a href="https://es.wikipedia.org/wiki/Amenaza_inform%C3%A1tica" target="_blank">Wiki: Amenazas Informáticas</a></li>
+				</ul>
+			</details>
+
+			<details class="card fade-in" style="margin-top:14px">
+				<summary><h3>Cómo protegerse</h3></summary>
+				<ul>
+					<li>Mantén software actualizado.</li>
+					<li>Usa contraseñas fuertes y únicas.</li>
+					<li>Instala antivirus y haz escaneos periódicos.</li>
+					<li>No descargues archivos de fuentes desconocidas.</li>
+					<li>Configura firewalls y segmenta redes.</li>
 				</ul>
 			</details>
 		</section>
@@ -166,6 +188,29 @@
 			}
 		}
 		loadAmenazas();
+
+		// Sticky nav active link detection
+		(function(){
+			const sectionIds = ['amenazas','herramientas','consejos','avanzado','sobre-nosotros'];
+			const navLinks = document.querySelectorAll('.sticky-nav a');
+			function updateActiveLink(){
+				const scrollY = window.scrollY || window.pageYOffset;
+				let current = '';
+				sectionIds.forEach(id=>{
+					const sec = document.getElementById(id);
+					if(!sec) return;
+					if(scrollY >= sec.offsetTop - 120) current = id;
+				});
+				navLinks.forEach(link=>{
+					const href = link.getAttribute('href') || '';
+					link.classList.toggle('active', current && href.includes('#' + current));
+				});
+			}
+			window.addEventListener('scroll', updateActiveLink, {passive:true});
+			window.addEventListener('resize', updateActiveLink);
+			updateActiveLink();
+		})();
+
 	</script>
 </body>
 </html>
