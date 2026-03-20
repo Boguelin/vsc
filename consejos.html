@@ -46,6 +46,8 @@
 
 		.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:14px}
 		.reviews.list{grid-template-columns:1fr}
+		.reviews.carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;padding-bottom:10px;}
+		.reviews.carousel .review-item{min-width:260px;flex:0 0 auto;scroll-snap-align:center}
 		.review-item{background:rgba(0,255,204,0.08);border-radius:12px;border:1px solid rgba(0,255,204,0.2);padding:14px;box-shadow:0 4px 20px rgba(0,0,0,0.4);transition:transform 0.2s,border-color 0.2s}
 		.review-item:hover{transform:translateY(-4px);border-color:rgba(0,255,204,0.5)}
 		.review-item h3{margin:0 0 8px;color:var(--accent);font-size:1.1rem}
@@ -127,9 +129,12 @@
 		<section id="consejos">
 			<div class="section-title" style="justify-content:space-between;align-items:center">
 				<h2>Consejos Avanzados</h2>
-				<button id="toggleView" class="btn primary" type="button">Ver como listado</button>
+				<div>
+					<button id="toggleView" class="btn primary" type="button">Ver como listado</button>
+					<button id="toggleCarousel" class="btn" type="button">Ver como carrusel</button>
+				</div>
 			</div>
-			<p>Además de las medidas básicas, aquí tienes un esquema visual con consejos destacados; puedes cambiar a listado con un clic.</p>
+			<p>Además de las medidas básicas, aquí tienes un esquema visual con consejos destacados; puedes cambiar el formato con un clic.</p>
 			<div id="advice-container" class="reviews">
 				<!-- Cartas de consejo generadas por JS -->
 			</div>
@@ -173,9 +178,19 @@
 		renderConsejos();
 
 		const toggleBtn = document.getElementById('toggleView');
+		const toggleCarouselBtn = document.getElementById('toggleCarousel');
 		toggleBtn.addEventListener('click', () => {
+			adviceContainer.classList.remove('carousel');
 			const isList = adviceContainer.classList.toggle('list');
 			toggleBtn.textContent = isList ? 'Ver como esquema' : 'Ver como listado';
+			toggleCarouselBtn.textContent = 'Ver como carrusel';
+		});
+
+		toggleCarouselBtn.addEventListener('click', () => {
+			adviceContainer.classList.remove('list');
+			const isCarousel = adviceContainer.classList.toggle('carousel');
+			toggleCarouselBtn.textContent = isCarousel ? 'Salir de carrusel' : 'Ver como carrusel';
+			toggleBtn.textContent = 'Ver como listado';
 		});
 
 		// Sticky nav active link detection
