@@ -44,6 +44,13 @@
 		details.card > div, details.card > ul, details.card > dl{padding:12px 16px}
 		details.card h3, details.card h2{margin:0}
 
+		.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:14px}
+		.reviews.list{grid-template-columns:1fr}
+		.review-item{background:rgba(0,255,204,0.08);border-radius:12px;border:1px solid rgba(0,255,204,0.2);padding:14px;box-shadow:0 4px 20px rgba(0,0,0,0.4);transition:transform 0.2s,border-color 0.2s}
+		.review-item:hover{transform:translateY(-4px);border-color:rgba(0,255,204,0.5)}
+		.review-item h3{margin:0 0 8px;color:var(--accent);font-size:1.1rem}
+		.review-item p{margin:0;color:var(--muted);line-height:1.45}
+
 		.section-title{display:flex;justify-content:space-between;align-items:center}
 			h2{color:var(--accent)}
 
@@ -118,44 +125,14 @@
 		</nav>
 
 		<section id="consejos">
-			<details class="card" open>
-				<div class="section-title">
-					<h2>Consejos Avanzados</h2>
-					<span class="professor">Iberseguridad</span>
-				</div>
-				<p>Además de las medidas básicas, aquí van consejos más avanzados para una protección superior.</p>
-				<div id="advice-content"></div>
-			</details>
-
-			<details class="card fade-in" style="margin-top:14px">
-				<summary><h3>Herramientas Recomendadas</h3></summary>
-				<ul>
-					<li><strong>Antivirus:</strong> Malwarebytes, Bitdefender</li>
-					<li><strong>VPN:</strong> ExpressVPN, NordVPN</li>
-					<li><strong>Gestores de Contraseñas:</strong> KeePass, 1Password</li>
-					<li><strong>Encriptación:</strong> VeraCrypt, AxCrypt</li>
-				</ul>
-			</details>
-
-			<details class="card fade-in" style="margin-top:14px">
-				<summary><h3>Recursos para Aprender Más</h3></summary>
-				<ul>
-					<li><a href="https://www.cybrary.it/" target="_blank">Cybrary - Cursos gratuitos</a></li>
-					<li><a href="https://www.hackthebox.com/" target="_blank">Hack The Box - Laboratorios</a></li>
-					<li><a href="https://owasp.org/" target="_blank">OWASP - Seguridad Web</a></li>
-				</ul>
-			</details>
-
-			<details class="card fade-in" style="margin-top:14px">
-				<summary><h3>Checklist de Seguridad</h3></summary>
-				<ul>
-					<li>Revisa y actualiza contraseñas cada 6 meses.</li>
-					<li>Activa MFA en todas las cuentas disponibles.</li>
-					<li>Realiza backups en 3 ubicaciones diferentes.</li>
-					<li>Audita tus permisos de aplicaciones periódicamente.</li>
-					<li>Lee informes de vulnerabilidad del software que usas.</li>
-				</ul>
-			</details>
+			<div class="section-title" style="justify-content:space-between;align-items:center">
+				<h2>Consejos Avanzados</h2>
+				<button id="toggleView" class="btn primary" type="button">Ver como listado</button>
+			</div>
+			<p>Además de las medidas básicas, aquí tienes un esquema visual con consejos destacados; puedes cambiar a listado con un clic.</p>
+			<div id="advice-container" class="reviews">
+				<!-- Cartas de consejo generadas por JS -->
+			</div>
 		</section>
 
 		<footer>
@@ -165,34 +142,41 @@
 
 	<script>
 		// Simple fade-in on scroll
-		// const observer = new IntersectionObserver(entries => {
-		// 	entries.forEach(entry => {
-		// 		if (entry.isIntersecting) {
-		// 			entry.target.classList.add('visible');
-		// 		}
-		// 	});
-		// });
-		// document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+				}
+			});
+		});
+		document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-		// load consejos
-		async function loadConsejos(){
-			try{
-				const res=await fetch('/api/consejos');
-				if(!res.ok) throw new Error('no api');
-				const data=await res.json();
-				const cont=document.getElementById('advice-content');
-				cont.innerHTML='';
-				data.advice.forEach(a=>{
-					console.log('Consejo cargado: ' + a);
-					const det=document.createElement('details');
-					det.className = 'card';
-					// det.setAttribute('open', '');
-					det.innerHTML='<summary>'+a+'</summary><p>Este es un consejo avanzado para mejorar tu ciberseguridad.</p>';
-					cont.appendChild(det);
-				});
-			}catch(e){console.error(e);}
+		const consejosData = [
+			{ title:'Revisión constante de contraseñas', text:'Cambia contraseñas de cuentas críticas cada 3-4 meses y usa gestores que generen claves únicas.' },
+			{ title:'Autenticación multifactor', text:'Activa MFA en todos los servicios que la soporten (correo, nube, redes sociales, banca) para impedir accesos con sólo contraseña.' },
+			{ title:'Auditorías periódicas', text:'Realiza pruebas de seguridad y revisa permisos de apps y extensiones que uses en el navegador y móvil.' },
+			{ title:'Segmentación de redes', text:'Separa la red de invitados y dispositivos IoT de la red principal para limitar el impacto de una captura de tráfico.' },
+			{ title:'Actualizaciones automáticas', text:'Mantén sistemas y software al día; aplica parches críticos en cuanto estén disponibles.' }
+		];
+
+		const adviceContainer = document.getElementById('advice-container');
+		function renderConsejos(){
+			adviceContainer.innerHTML = '';
+			consejosData.forEach((item, index) => {
+				const card = document.createElement('article');
+				card.className = 'review-item';
+				card.innerHTML = `<h3>${index + 1}. ${item.title}</h3><p>${item.text}</p>`;
+				adviceContainer.appendChild(card);
+			});
 		}
-		loadConsejos();
+
+		renderConsejos();
+
+		const toggleBtn = document.getElementById('toggleView');
+		toggleBtn.addEventListener('click', () => {
+			const isList = adviceContainer.classList.toggle('list');
+			toggleBtn.textContent = isList ? 'Ver como esquema' : 'Ver como listado';
+		});
 
 		// Sticky nav active link detection
 		(function(){
@@ -215,7 +199,6 @@
 			window.addEventListener('resize', updateActiveLink);
 			updateActiveLink();
 		})();
-
 	</script>
 </body>
 </html>
