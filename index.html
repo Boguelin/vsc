@@ -67,10 +67,13 @@
 		.image-frame span{color:var(--muted);font-size:13px;}
 
 			/* password tester styles */
-			.pwd-container{width:100%;max-width:620px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-			.pwd-input{flex: 1 1 auto;min-width:180px;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:#111;color:#eee;box-sizing:border-box}
+			.pwd-container{width:100%;max-width:420px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+			.pwd-input{flex: 1 1 auto;min-width:160px;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:#111;color:#eee;box-sizing:border-box}
 			.pwd-toggle{position:static;background:rgba(255,255,255,0.12);color:var(--muted);border:none;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:12px;white-space:nowrap;}
 			.pwd-toggle:hover{background:rgba(255,255,255,0.22);color:var(--accent)}
+			.pwd-bar{width:100%;max-width:420px;height:10px;background:#222;border-radius:5px;margin-top:6px;overflow:hidden}
+			.pwd-bar-inner{height:100%;width:0;background:var(--accent);transition:width 0.3s,background 0.3s}
+
 			.pwd-bar{width:100%;height:10px;background:#222;border-radius:5px;margin-top:6px;overflow:hidden}
 			.pwd-bar-inner{height:100%;width:0;background:var(--accent);transition:width 0.3s,background 0.3s}
 			.pwd-label{margin-top:8px;color:var(--muted);font-weight:600}
