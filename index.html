@@ -459,19 +459,24 @@
 		document.getElementById('pwd').addEventListener('input', (e) => {
 			const pwd = e.target.value;
 			let score = 0;
-			if(pwd.length >= 8) score += 1;
-			if(/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) score += 1;
-			if(/[0-9]/.test(pwd)) score += 1;
-			if(/[^A-Za-z0-9]/.test(pwd)) score += 1;
-			const labels = ['Muy débil','Débil','Media','Fuerte','Muy fuerte'];
-			const colors = ['#ff4444','#ff8844','#cccc00','#88ff44','#44ffcc'];
-			const pct = (score/4)*100;
+			if (pwd.length >= 8) score += 1;
+			if (/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) score += 1;
+			if (/[0-9]/.test(pwd)) score += 1;
+			if (/[^A-Za-z0-9]/.test(pwd)) score += 1;
+			// three level strength classification
+			let level = 'Débil';
+			let color = '#ff4444';
+			let width = 33;
+			if (score >= 3) { level = 'Fuerte'; color = '#88ff44'; width = 100; }
+			else if (score === 2) { level = 'Normal'; color = '#cccc00'; width = 66; }
+			else if (score === 1) { level = 'Débil'; color = '#ff8844'; width = 33; }
+			else { level = 'Muy débil'; color = '#ff4444'; width = 15; }
 			const barInner = document.querySelector('.pwd-bar-inner');
-			barInner.style.width = pct + '%';
-			barInner.style.background = colors[score] || '#444';
+			barInner.style.width = width + '%';
+			barInner.style.background = color;
 			const labelEl = document.getElementById('pwd-strength');
-			labelEl.textContent = labels[score] || '';
-			labelEl.style.color = colors[score] || '#a1b0c2';
+			labelEl.textContent = level;
+			labelEl.style.color = color;
 		});
 
 		// password show/hide
