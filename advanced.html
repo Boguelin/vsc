@@ -274,11 +274,26 @@
 
     // consejos dinamicos (imitando consejos.html)
     const consejosDataAdv = [
-      { title:'Modelos de amenaza', text:'Un modelo de amenaza ayuda a entender quién puede atacar, por qué y cómo; se aplica a activos, vectores y consecuencias.' },
-      { title:'Criptografía básica', text:'Explica conceptos de cifrado simple (César, Vigenère) y por qué proteger los datos con llaves adecuadas.' },
-      { title:'Cifrado Vigenère', text:'Un ejemplo de algoritmo de sustitución polialfabética, útil para entender la evolución de los sistemas de cifrado.' },
-      { title:'Hash SHA-256', text:'Funciones de hash como SHA-256 generan huellas únicas para datos. Son unidireccionales y usadas en autenticación.' },
-      { title:'Seguridad con IA', text:'La inteligencia artificial ayuda a detectar ataques y también se usa para automatizar amenazas; entender esto es clave.' }
+      { title:'Modelos de amenaza', text:'Cómo identificar actores, vectores y activos críticos. Incluye STRIDE y PASTA.' },
+      { title:'Criptografía básica', text:'Principios de cifrado simétrico y asimétrico, uso práctico en protocolos como HTTPS.' },
+      { title:'Algoritmos modernos', text:'AES, RSA, hash (SHA-256) y cómo se usan en la práctica para proteger datos.' },
+      { title:'Seguridad en redes', text:'Segmentación, IDS/IPS y monitorización continua de tráfico.' },
+      { title:'Seguridad y IA', text:'Uso de inteligencia artificial para defensa (detección de anomalías) y ataque (deepfakes).' },
+      { title:'Ataques cuánticos', text:'Impacto potencial de la computación cuántica en criptografía actual.' },
+      { title:'Buenas prácticas para desarrolladores', text:'Validación de entrada, autenticación segura y gestión de sesiones.' },
+      { title:'Evaluación de riesgos', text:'Matriz de impacto/probabilidad y estrategias de mitigación.' },
+      { title:'Historia de la criptografía', text:'Desde César y Enigma hasta la era digital y post-cuántica.' },
+      { title:'Seguridad en la nube', text:'Modelos compartidos, cifrado en reposo y tránsito, compliance.' },
+      { title:'Forense digital', text:'Recolección, preservación y análisis de evidencia en incidentes.' },
+      { title:'Zero Trust Architecture', text:'Nunca confíes, siempre verifica: principios y implementación.' },
+      { title:'Blockchain y seguridad', text:'Cómo la cadena de bloques mejora la integridad de datos.' },
+      { title:'IoT Security', text:'Desafíos en dispositivos conectados y mejores prácticas.' },
+      { title:'Regulaciones y compliance', text:'GDPR, NIST, ISO 27001 y su aplicación.' },
+      { title:'Seguridad móvil', text:'Protección de smartphones y tablets; permisos de apps.' },
+      { title:'Seguridad en contenedores', text:'Docker/Kubernetes: cómo asegurar aplicaciones empaquetadas.' },
+      { title:'Seguridad industrial (ICS)', text:'Protección de sistemas de control de infraestructuras.' },
+      { title:'Modelos de amenaza (versión general)', text:'Un modelo de amenaza ayuda a entender quién querría atacar, por qué y cómo. Para 4º ESO lo explicamos con ejemplos: redes sociales, dispositivos móviles y equipos del instituto.' },
+      { title:'Ejemplo práctico', text:'Si alguien publica fotos personales, el atacante usa ingeniería social para suplantar identidad; identifica riesgos y mitiga.' }
     ];
     const adviceContainerAdv = document.getElementById('advice-container-adv');
     function renderConsejosAdv(){
