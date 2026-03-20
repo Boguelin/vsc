@@ -102,9 +102,15 @@
 
 		/* small responsive */
 		@media(max-width:980px){.grid{grid-template-columns:1fr}}
-	</style>
+	
+    /* Matrix overlay */
+    #matrixCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.35;background:radial-gradient(circle farthest-corner at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.85) 100%)}
+    #matrixToggle{position:fixed;top:14px;right:14px;z-index:2000;padding:8px 12px;background:rgba(0,0,0,0.65);border:1px solid rgba(0,255,204,0.5);color:#0f0;border-radius:8px;backdrop-filter:blur(6px);cursor:pointer;font-weight:700}
+</style>
 </head>
 <body>
+  <canvas id='matrixCanvas' aria-hidden='true'></canvas>
+  <button id='matrixToggle'>Matrix on/off</button>
 	<div class="lines" aria-hidden="true">
 		<div class="line x" style="top:10%"></div>
 		<div class="line x" style="top:30%;animation-duration:12s;opacity:0.08"></div>
@@ -527,5 +533,30 @@
 			updateActiveLink();
 		})();
 	</script>
+
+  <script>
+    (function(){
+      const canvas=document.getElementById('matrixCanvas');
+      const ctx=canvas.getContext('2d');
+      let w=window.innerWidth, h=window.innerHeight;
+      const font=18;
+      let cols=Math.floor(w/font);
+      let drops=[...Array(cols)].map(()=>1);
+      const letters='01あいうえおかきくけこさしすせそたちつてとなにぬねの';
+      function resize(){w=window.innerWidth;h=window.innerHeight;canvas.width=w;canvas.height=h;cols=Math.floor(w/font);drops.length=cols;while(drops.length<cols)drops.push(1);}
+      window.addEventListener('resize',resize);
+      function frame(){ctx.fillStyle='rgba(0,0,0,0.14)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#0f0';ctx.font=font+'px monospace';
+        for(let i=0;i<cols;i++){const txt=letters[Math.floor(Math.random()*letters.length)];const x=i*font;const y=drops[i]*font;ctx.fillText(txt,x,y);if(y>h&&Math.random()>0.975) drops[i]=0;drops[i]++;}
+        requestAnimationFrame(frame);
+      }
+      resize();
+      frame();
+      const toggle=document.getElementById('matrixToggle');
+      let active=true;
+      toggle.textContent='Desactivar matrix';
+      toggle.onclick=()=>{active=!active;canvas.style.display=active?'block':'none';toggle.textContent=active?'Desactivar matrix':'Activar matrix';};
+    })();
+  </script>
+
 </body>
 </html>
