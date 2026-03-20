@@ -69,6 +69,11 @@
 		.card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.8);border-color:var(--accent)}
 
 		/* details animation */
+    /* matrix overlay text front */
+    .card{background:rgba(0,0,0,0.25);position:relative;z-index:0;}
+    .card > *{position:relative;z-index:2;}
+    .card::before{content:'';position:absolute;inset:0;z-index:1;background:inherit;}
+    
 		details{transition:background 0.3s}
 		details[open]{animation:fadeInDetails 0.4s ease}
 		@keyframes fadeInDetails{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
